@@ -45,3 +45,16 @@ function toggleMenu(open) {
 btn.addEventListener('click', () => toggleMenu(panel.hidden));
 document.addEventListener('click', e => { if (!e.target.closest('.menu')) toggleMenu(false); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { toggleMenu(false); btn.focus(); } });
+
+// Foto ampliable (solo si la página tiene el retrato y el diálogo)
+const portraitBtn = document.getElementById('portraitBtn');
+const lightbox = document.getElementById('lightbox');
+if (portraitBtn && lightbox) {
+  portraitBtn.addEventListener('click', () => {
+    const img = portraitBtn.querySelector('img');
+    if (!img) return; // si la imagen no cargó, no hay nada que ampliar
+    document.getElementById('lightboxImg').src = img.src;
+    lightbox.showModal();
+  });
+  lightbox.addEventListener('click', () => lightbox.close()); // clic en cualquier sitio cierra
+}
