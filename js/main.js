@@ -23,6 +23,8 @@ async function setLang(lang) {
   document.querySelectorAll('.lang button').forEach(b =>
     b.classList.toggle('active', b.dataset.lang === lang));
   try { localStorage.setItem('lang', lang); } catch (e) {}
+  window.I18N = dict;
+  document.dispatchEvent(new CustomEvent('langchange'));
 }
 
 // Enlaces relativos a la raíz (funcionan también en GitHub Pages de proyecto y en subcarpetas)
@@ -58,3 +60,18 @@ if (portraitBtn && lightbox) {
   });
   lightbox.addEventListener('click', () => lightbox.close()); // clic en cualquier sitio cierra
 }
+
+// Botones que copian un texto al portapapeles (data-copy)
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  const text = b.dataset.copy;
+  try { await navigator.clipboard.writeText(text); }
+  catch (e) { // plan B para navegadores sin portapapeles moderno
+    const ta = Object.assign(document.createElement('textarea'), { value: text });
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+  }
+  const span = b.querySelector('span') || b;
+  const old = span.dataset.i18n;
+  span.textContent = (window.I18N || {})['support.copied'] || 'OK';
+  span.removeAttribute('data-i18n');
+  setTimeout(() => { span.dataset.i18n = old; const t = (window.I18N || {})[old]; if (t) span.textContent = t; }, 1800);
+}));
