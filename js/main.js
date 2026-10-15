@@ -1,11 +1,12 @@
 // Reutilizable en cualquier página: calcula la raíz del sitio a partir de la ruta de este script.
+const V = '13'; // sube este número en cada versión para forzar la recarga de cachés
 const ROOT = new URL('../', document.currentScript.src).href;
 const LANGS = ['es', 'en'];
 const cache = {};
 
 async function loadLang(lang) {
   if (!cache[lang]) {
-    const res = await fetch(`${ROOT}i18n/${lang}.json`);
+    const res = await fetch(`${ROOT}i18n/${lang}.json?v=${V}`);
     cache[lang] = await res.json();
   }
   return cache[lang];

@@ -4,7 +4,7 @@ const t = (k, v = {}) => Object.entries(v).reduce((s, [x, y]) => s.replace(`{${x
 const lang = () => document.documentElement.lang || 'es';
 const goldIco = () => `<img class="gico" src="${ROOT}assets/materials/gold.png" alt="" onerror="this.remove()">`;
 const fmt = n => n.toLocaleString(lang());
-const gold = n => n >= 1e6 ? `${+(n / 1e6).toFixed(2)}kk` : n >= 1e3 ? `${+(n / 1e3).toFixed(1)}k` : `${n}`;
+const gold = n => fmt(n); // oro siempre exacto, con separador de miles (sin k/kk)
 
 // Pasos desde el nivel `from` hasta el máximo. El contador solo afecta al primer paso.
 function plan(cat, from, counter) {
@@ -63,4 +63,4 @@ $('level').addEventListener('change', render);
 $('counter').addEventListener('input', render);
 document.addEventListener('langchange', render);
 
-fetch(`${ROOT}data/pity.json`).then(r => r.json()).then(d => { DATA = d; fillLevels(); render(); });
+fetch(`${ROOT}data/pity.json?v=${V}`).then(r => r.json()).then(d => { DATA = d; fillLevels(); render(); });
