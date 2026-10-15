@@ -30,9 +30,8 @@
   "pity.counter.hint": "Failed attempts accumulated on this upgrade.",
   "type.weapon": "Weapon / Armor",
   "type.spec": "Specialist Card",
-  "type.tattoo": "Tattoo (coming soon)",
-  "type.rune": "Rune (coming soon)",
-  "type.fairy": "Fairy (coming soon)",
+  "type.tattoo": "Tattoo",
+  "type.fairy": "Fairy",
   "pity.next": "Up to +{b}",
   "pity.max": "Up to max level (+{m})",
   "pity.attempts": "max attempts",
@@ -44,7 +43,9 @@
   "th.pity": "Pity",
   "th.attempts": "Attempts",
   "th.gold": "Gold",
-  "pity.assume": "Worst-case calculation: probabilities are ignored and every upgrade goes all the way to pity (the attempt number equal to the pity is the guaranteed one). Steps without pity count as 1 attempt.",
+  "pity.assume": "Worst-case calculation: probabilities are ignored. With a pity of n, attempt n+1 is a guaranteed success; with counter 0 and pity 3, the maximum is 4 attempts. Steps with no pity or 100% success count as 1 attempt.",
   "support.copied": "Code copied!",
-  "support.epicHint": "Click the Epic button to copy my creator code and use it at checkout on the Epic Games Store."
+  "support.epicHint": "Click the Epic button to copy my creator code and use it at checkout on the Epic Games Store.",
+  "type.runeW": "Weapon rune",
+  "type.runeA": "Armor rune"
 }

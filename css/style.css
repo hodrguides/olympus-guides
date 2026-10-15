@@ -103,3 +103,4 @@ th:first-child,td:first-child{text-align:left}
 th{color:var(--muted);font-weight:700}
 .ico{width:26px;height:26px;flex:none;display:grid;place-items:center}
 .ico img{max-width:100%;max-height:100%;image-rendering:auto}
+.gico{width:18px;height:18px;vertical-align:-3px;margin-right:.3rem}

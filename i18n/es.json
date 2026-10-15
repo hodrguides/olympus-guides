@@ -30,9 +30,8 @@
   "pity.counter.hint": "Intentos fallidos acumulados en esta mejora.",
   "type.weapon": "Arma / Armadura",
   "type.spec": "Tarjeta de especialista",
-  "type.tattoo": "Tatuaje (próximamente)",
-  "type.rune": "Runa (próximamente)",
-  "type.fairy": "Hada (próximamente)",
+  "type.tattoo": "Tatuaje",
+  "type.fairy": "Hada",
   "pity.next": "Hasta +{b}",
   "pity.max": "Hasta el nivel máximo (+{m})",
   "pity.attempts": "intentos máximos",
@@ -44,7 +43,9 @@
   "th.pity": "Pity",
   "th.attempts": "Intentos",
   "th.gold": "Oro",
-  "pity.assume": "Calcula el peor caso: se ignoran las probabilidades y cada mejora llega hasta el pity (el intento número igual al pity es el seguro). Los pasos sin pity cuentan como 1 intento.",
+  "pity.assume": "Cálculo del peor caso: se ignoran las probabilidades. Con un pity de n, el intento n+1 es éxito seguro; con contador 0 y pity 3, el máximo son 4 intentos. Los pasos sin pity o con 100% de éxito cuentan como 1 intento.",
   "support.copied": "¡Código copiado!",
-  "support.epicHint": "Pulsa el botón de Epic para copiar mi código de creador y úsalo al pagar en la Epic Games Store."
+  "support.epicHint": "Pulsa el botón de Epic para copiar mi código de creador y úsalo al pagar en la Epic Games Store.",
+  "type.runeW": "Runa de arma",
+  "type.runeA": "Runa de armadura"
 }
