@@ -1,5 +1,5 @@
 const $ = id => document.getElementById(id);
-let D = null, counts = {}, last = null, approx = false, NOSYM = false;
+let D = null, counts = {}, levels = {}, last = null, planText = '', approx = false, NOSYM = false;
 const t = (k, v = {}) => Object.entries(v).reduce((s, [x, y]) => s.replace(`{${x}}`, y), (window.I18N || {})[k] || k);
 const lang = () => document.documentElement.lang || 'es';
 const fmt = n => n.toLocaleString(lang());
@@ -8,15 +8,20 @@ const slug = s => s.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, 
 const ico = (dir, id, alt) => `<img class="pi" src="${ROOT}assets/${dir}/${id}.png" alt="${alt}" title="${alt}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'pt',textContent:this.alt}))">`;
 const pic = n => `<img class="pp" src="${ROOT}assets/pets/${slug(n)}.png" alt="" onerror="this.style.visibility='hidden'">`;
 const acorn = () => `<img class="gico" src="${ROOT}assets/materials/golden-acorn.png" alt="" onerror="this.remove()">`;
-try { counts = JSON.parse(localStorage.getItem('petafk') || '{}'); } catch (e) {}
-const save = () => { try { localStorage.setItem('petafk', JSON.stringify(counts)); } catch (e) {} };
+try { counts = JSON.parse(localStorage.getItem('petafk') || '{}'); levels = JSON.parse(localStorage.getItem('petafk_lv') || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem('petafk', JSON.stringify(counts)); localStorage.setItem('petafk_lv', JSON.stringify(levels)); } catch (e) {} };
+// Poder actual = poder máximo (nivel 99) / 99 × nivel, truncado a entero como en el juego
+const curPower = (max, lv) => Math.floor(max * lv / 99);
+const pwText = (max, lv) => lv < 99 ? `${fmt(curPower(max, lv))} <span class="mx">/ ${fmt(max)}</span>` : fmt(max);
+const label = u => D.pets[u.i][0] + (u.lv < 99 ? ` (${t('pet.lv')} ${u.lv})` : '');
 
 // SOLVER START
 // Unidades: una por cada copia; de cada clase (elemento+tipo) solo importan las 15 más fuertes.
 function buildUnits() {
   const by = {};
-  D.pets.forEach(([name, el, ty, p], i) => {
-    for (let c = 0; c < (counts[name] || 0); c++) (by[el + ty] = by[el + ty] || []).push({ p, el, ty, i });
+  D.pets.forEach(([name, el, ty, max], i) => {
+    const lv = levels[name] || 99, p = Math.floor(max * lv / 99);
+    for (let c = 0; c < (counts[name] || 0); c++) (by[el + ty] = by[el + ty] || []).push({ p, el, ty, i, lv });
   });
   let U = [];
   for (const k in by) U = U.concat(by[k].sort((a, b) => b.p - a.p).slice(0, 15));
@@ -104,10 +109,12 @@ function solve(U, limitMs = 8000, only24 = false) {
 function renderList() {
   const q = $('q').value.trim().toLowerCase();
   $('list').innerHTML = D.pets.map((p, i) => ({ p, i })).filter(({ p }) => p[0].toLowerCase().includes(q)).map(({ p, i }) => {
-    const n = counts[p[0]] || 0;
+    const n = counts[p[0]] || 0, lv = levels[p[0]] || 99;
     return `<div class="pet${n ? ' on' : ''}" data-i="${i}"><input type="checkbox" aria-label="${p[0]}" ${n ? 'checked' : ''}>${pic(p[0])}
-      <span class="pn">${p[0]}<small>${fmt(p[3])}</small></span>${ico('elements', p[1], cap(p[1]))}${ico('attack', p[2], cap(p[2]))}
-      <input class="cnt" type="number" min="1" max="99" value="${n || 1}" aria-label="${t('pet.copies')}" ${n ? '' : 'hidden'}></div>`;
+      <span class="pn">${p[0]}<small class="pw">${pwText(p[3], lv)}</small></span>${ico('elements', p[1], cap(p[1]))}${ico('attack', p[2], cap(p[2]))}
+      <div class="ctl" ${n ? '' : 'hidden'}>
+        <label class="fld">${t('pet.copies')}<input class="cnt" type="number" min="1" max="99" value="${n || 1}"></label>
+        <label class="fld">${t('pet.level')}<input class="lvl" type="number" min="1" max="99" value="${lv}"></label></div></div>`;
   }).join('');
 }
 const total = () => Object.values(counts).reduce((s, n) => s + n, 0);
@@ -115,22 +122,29 @@ const upSel = () => { $('sel').textContent = t('pet.sel', { n: total() }); };
 
 $('list').addEventListener('change', e => {
   const row = e.target.closest('.pet'); if (!row) return;
-  const name = D.pets[+row.dataset.i][0], num = row.querySelector('.cnt');
+  const pet = D.pets[+row.dataset.i], name = pet[0];
+  if (e.target.classList.contains('lvl')) {            // nivel de la mascota (1-99, por defecto 99)
+    const v = e.target.value === '' ? 99 : Math.max(1, Math.min(99, Math.floor(+e.target.value) || 1));
+    if (v === 99) delete levels[name]; else levels[name] = v;
+    e.target.value = v; row.querySelector('.pw').innerHTML = pwText(pet[3], v);
+    save(); return;
+  }
   counts[name] = e.target.type === 'checkbox' ? (e.target.checked ? 1 : 0)
     : Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
   if (!counts[name]) delete counts[name];
   const n = counts[name] || 0;
   row.classList.toggle('on', !!n); row.querySelector('input[type=checkbox]').checked = !!n;
-  num.hidden = !n; num.value = n || 1;
+  row.querySelector('.ctl').hidden = !n; row.querySelector('.cnt').value = n || 1;
   save(); upSel();
 });
 $('q').addEventListener('input', renderList);
+$('out').addEventListener('click', e => { const b = e.target.closest('.copybtn'); if (b) copyBtn(b, planText); });
 try { $('only24').checked = localStorage.getItem('petafk24') === '1'; } catch (e) {}
 $('only24').addEventListener('change', () => {
   try { localStorage.setItem('petafk24', $('only24').checked ? '1' : '0'); } catch (e) {}
   if (last) $('calc').click(); // si ya había un resultado, se recalcula con la nueva opción
 });
-$('clear').addEventListener('click', () => { counts = {}; save(); renderList(); upSel(); last = null; $('out').innerHTML = ''; });
+$('clear').addEventListener('click', () => { counts = {}; levels = {}; save(); renderList(); upSel(); last = null; $('out').innerHTML = ''; });
 
 function show() {
   if (!last) return;
@@ -144,10 +158,14 @@ function show() {
     const rw = r.j.d === 24 ? `${fmt(c[6])}` : `${c[5]} × 2 = ${fmt(2 * c[5])}`;
     return `<article class="res job"><h3><span>${t('pet.slot', { n: n + 1 })}: ${c[0]}</span><span>${r.j.d} h</span></h3>
       <p class="meta">${cond} · ${t('pet.power', { a: fmt(pw), b: fmt(c[1]) })}</p>
-      <ul>${tm.map(u => `<li>${pic(D.pets[u.i][0])}${D.pets[u.i][0]}${ico('elements', u.el, cap(u.el))}${ico('attack', u.ty, cap(u.ty))}<small>${fmt(u.p)}</small></li>`).join('')}</ul>
+      <ul>${tm.map(u => `<li>${pic(D.pets[u.i][0])}${D.pets[u.i][0]}${ico('elements', u.el, cap(u.el))}${ico('attack', u.ty, cap(u.ty))}<small>${u.lv < 99 ? `${t('pet.lv')} ${u.lv} · ` : ''}${fmt(u.p)}</small></li>`).join('')}</ul>
       <p class="rw">${acorn()}${rw}</p>${r.j.d === 12 ? `<p class="meta">${t('pet.twice')}</p>` : ''}</article>`;
   }).join('');
-  $('out').innerHTML = `<p class="total">${t('pet.total')}: ${acorn()}${fmt(res.total)}</p><div class="results">${cards}</div>
+  planText = [`${t('pet.title')}: ${fmt(res.total)} ${t('pet.acorns')}`].concat(res.jobs.map((r, n) => {
+    const c = D.camps[r.j.ci];
+    return `${t('pet.slot', { n: n + 1 })}: ${c[0]} (${r.j.d} h${r.j.d === 12 ? ' ×2' : ''}) — ${fmt(r.j.d === 24 ? c[6] : 2 * c[5])} ${t('pet.acorns')}\n${r.team.map(i => label(U[i])).join(', ')}`;
+  })).join('\n');
+  $('out').innerHTML = `<p class="total">${t('pet.total')}: ${acorn()}${fmt(res.total)}</p><button class="btn copybtn" type="button">${t('copy.btn')}</button><div class="results">${cards}</div>
     <p class="note">${t('pet.unused', { n: total() - used.size })}</p>${approx ? `<p class="note">${t('pet.approx')}</p>` : ''}`;
 }
 

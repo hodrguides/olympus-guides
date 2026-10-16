@@ -1,5 +1,5 @@
 // Reutilizable en cualquier página: calcula la raíz del sitio a partir de la ruta de este script.
-const V = '22'; // sube este número en cada versión para forzar la recarga de cachés
+const V = '25'; // sube este número en cada versión para forzar la recarga de cachés
 const ROOT = new URL('../', document.currentScript.src).href;
 const LANGS = ['es', 'en'];
 const cache = {};
@@ -62,16 +62,25 @@ if (portraitBtn && lightbox) {
   lightbox.addEventListener('click', () => lightbox.close()); // clic en cualquier sitio cierra
 }
 
-// Botones que copian un texto al portapapeles (data-copy)
-document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
-  const text = b.dataset.copy;
+// Copiar texto al portapapeles (con plan B para navegadores antiguos)
+window.copyText = async text => {
   try { await navigator.clipboard.writeText(text); }
-  catch (e) { // plan B para navegadores sin portapapeles moderno
+  catch (e) {
     const ta = Object.assign(document.createElement('textarea'), { value: text });
     document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
   }
-  const span = b.querySelector('span') || b;
-  const old = span.dataset.i18n;
+};
+// Copia y cambia un momento el texto del botón a "¡Copiado!"
+window.copyBtn = async (b, text) => {
+  await copyText(text);
+  const old = b.textContent;
+  b.textContent = (window.I18N || {})['copy.done'] || 'OK';
+  setTimeout(() => { b.textContent = old; }, 1600);
+};
+// Botones con texto fijo (data-copy), como el código de Epic
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  const text = b.dataset.copy, span = b.querySelector('span') || b, old = span.dataset.i18n;
+  await copyText(text);
   span.textContent = (window.I18N || {})['support.copied'] || 'OK';
   span.removeAttribute('data-i18n');
   setTimeout(() => { span.dataset.i18n = old; const t = (window.I18N || {})[old]; if (t) span.textContent = t; }, 1800);

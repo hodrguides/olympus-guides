@@ -49,7 +49,7 @@
   "type.runeW": "Runa de arma",
   "type.runeA": "Runa de armadura",
   "pet.title": "Pet AFK Arena",
-  "pet.intro": "Marca las mascotas que tienes (nivel 99) y cuántas copias de cada una. La calculadora busca el reparto en expediciones que más bellotas da al día.",
+  "pet.intro": "Marca las mascotas que tienes, cuántas copias y su nivel (por defecto 99). La calculadora busca el reparto en expediciones que más bellotas da al día.",
   "pet.rules": "Reglas usadas: 3 huecos de expedición a la vez; cada hueco hace una expedición de 24 h o dos de 12 h seguidas, y se pueden repetir con el mismo equipo. No se repite la misma campaña con la misma duración a la vez. Máximo 5 mascotas por equipo y una mascota no puede estar en dos expediciones a la vez. El poder pedido es la suma del poder de las mascotas enviadas.",
   "pet.search": "Buscar mascota por nombre",
   "pet.clear": "Vaciar selección",
@@ -109,5 +109,12 @@
   "wings.towers": "Solo con torres completas: unas {n} torres ({w} si cuentas la ruleta).",
   "wings.notes": "Cálculo aproximado: un mes son 30 días y se supone un piso al día para la diaria. No cuenta la recompensa mensual de la clasificación ni que repitas la torre varias veces en un mismo mes.",
   "wings.month": "Torre completada este mes (ya cobré el logro mensual)",
-  "wings.c.monthly.done": "Logro mensual (ya cobrado este mes)"
+  "wings.c.monthly.done": "Logro mensual (ya cobrado este mes)",
+  "copy.btn": "Copiar resultado",
+  "copy.done": "¡Copiado!",
+  "pet.acorns": "bellotas",
+  "wings.title": "Alas de Paimon",
+  "pet.level": "Nivel",
+  "pet.lv": "Nv.",
+  "pet.levelnote": "El poder de cada mascota se calcula como poder máximo ÷ 99 × nivel, sin decimales (se trunca, como en el juego). Si tienes varias copias de una mascota, se usa el mismo nivel para todas."
 }

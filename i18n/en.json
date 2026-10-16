@@ -49,7 +49,7 @@
   "type.runeW": "Weapon rune",
   "type.runeA": "Armor rune",
   "pet.title": "Pet AFK Arena",
-  "pet.intro": "Tick the pets you own (level 99) and how many copies of each. The calculator finds the expedition split that gives the most acorns per day.",
+  "pet.intro": "Tick the pets you own, how many copies and their level (99 by default). The calculator finds the expedition split that gives the most acorns per day.",
   "pet.rules": "Rules used: 3 expedition slots at once; each slot runs one 24 h expedition or two 12 h ones in a row, and they can be repeated with the same team. The same campaign with the same duration can't run twice at once. Max 5 pets per team and a pet can't be in two expeditions at once. The required power is the sum of the power of the pets sent.",
   "pet.search": "Search pet by name",
   "pet.clear": "Clear selection",
@@ -109,5 +109,12 @@
   "wings.towers": "With full runs only: about {n} runs ({w} counting the roulette).",
   "wings.notes": "Approximate calculation: a month is 30 days and one floor a day is assumed for the daily. It doesn't count the monthly ranking reward or repeating the spire several times in the same month.",
   "wings.month": "Spire completed this month (monthly achievement already claimed)",
-  "wings.c.monthly.done": "Monthly achievement (already claimed this month)"
+  "wings.c.monthly.done": "Monthly achievement (already claimed this month)",
+  "copy.btn": "Copy result",
+  "copy.done": "Copied!",
+  "pet.acorns": "acorns",
+  "wings.title": "Paimon's Wings",
+  "pet.level": "Level",
+  "pet.lv": "Lv.",
+  "pet.levelnote": "Each pet's power is calculated as max power ÷ 99 × level, without decimals (truncated, as in the game). If you own several copies of a pet, the same level is used for all of them."
 }

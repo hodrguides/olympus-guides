@@ -1,5 +1,5 @@
 const $ = id => document.getElementById(id);
-let D = null;
+let D = null, lastText = '';
 const t = (k, v = {}) => Object.entries(v).reduce((s, [x, y]) => s.replace(`{${x}}`, y), (window.I18N || {})[k] || k);
 const fmt = n => n.toLocaleString(document.documentElement.lang || 'es');
 const img = (id, cls = 'gico') => `<img class="${cls}" src="${ROOT}assets/materials/${id}.png" alt="" onerror="this.remove()">`;
@@ -21,11 +21,16 @@ function calc() {
   const perDay = D.daily.coins, tower = D.floors.length * D.roulette;      // ruleta de una torre
   const base = perDay * D.days;
   const sc = [['wings.s1', base], ['wings.s2', base + all], ['wings.s3', base + all + tower], ['wings.s4', base + all + tower + mon]];
-  const rows = sc.map(([k, m]) => `<tr><td>${t(k)}</td><td>${fmt(m)}</td><td>${t('wings.time', { m: fmt(Math.round(R / m * 10) / 10), d: fmt(Math.ceil(R * D.days / m)) })}</td></tr>`).join('');
+  const rd = sc.map(([k, m]) => [t(k), m, t('wings.time', { m: fmt(Math.round(R / m * 10) / 10), d: fmt(Math.ceil(R * D.days / m)) })]);
+  const rows = rd.map(([a, b, c]) => `<tr><td>${a}</td><td>${fmt(b)}</td><td>${c}</td></tr>`).join('');
   const li = (ic, label, val) => `<li>${ic}${label}<b>${val}</b></li>`;
   const after = Math.max(0, R - T);
+  lastText = [t('wings.title'), t('wings.progress', { a: fmt(Math.min(have, D.wings)), b: fmt(D.wings), p: pct }), t('wings.need', { n: fmt(R) }),
+    `${t('wings.rest', { f })}: ${t('wings.gold')} ${fmt(sum(0))}, ${t('wings.fame')} ${fmt(sum(2))}, ${t('wings.c.total')} ${fmt(T)}`,
+    after ? t('wings.after', { n: fmt(after) }) : t('wings.after0')].concat(rd.map(([a, b, c]) => `${a}: ${fmt(b)} — ${c}`)).join('\n');
 
   $('out').innerHTML = `${bar}<p class="total">${t('wings.need', { n: fmt(R) })}</p>
+  <button class="btn copybtn" type="button">${t('copy.btn')}</button>
   <div class="results"><article class="res"><h3>${t('wings.rest', { f })}</h3><ul>
     ${li('', t('wings.floors'), fmt(rest.length))}${li(img('gold'), t('wings.gold'), fmt(sum(0)))}${li(img('fame'), t('wings.fame'), fmt(sum(2)))}
     ${li(img('infinity-coin'), t('wings.c.floors'), fmt(cf))}${li(img('infinity-coin'), t('wings.c.roulette'), '~' + fmt(roul))}
@@ -38,5 +43,6 @@ function calc() {
 }
 ['floor', 'coins'].forEach(id => $(id).addEventListener('input', calc));
 $('done').addEventListener('change', calc);
+$('out').addEventListener('click', e => { const b = e.target.closest('.copybtn'); if (b) copyBtn(b, lastText); });
 document.addEventListener('langchange', calc);
 fetch(`${ROOT}data/celestial-spire.json?v=${V}`).then(r => r.json()).then(d => { D = d; calc(); });
