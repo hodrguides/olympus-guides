@@ -10,9 +10,10 @@ function calc() {
   const f = num('floor', 1, 50), have = num('coins', 0, 1e9);
   const R = Math.max(0, D.wings - have), pct = Math.min(100, Math.floor(have * 100 / D.wings));
   const rest = D.floors.slice(f - 1), sum = i => rest.reduce((s, x) => s + x[i], 0);
-  const roul = rest.length * D.roulette, mon = D.monthly.coins, cf = sum(1), T = cf + roul + mon;
+  const claimed = $('done').checked; // logro mensual ya cobrado este mes: no suma 50 coin ni 10 fragmentos
+  const roul = rest.length * D.roulette, mon = claimed ? 0 : D.monthly.coins, cf = sum(1), T = cf + roul + mon;
   const boxes = rest.filter(x => x[3].includes('box')).length;
-  const frags = rest.filter(x => x[3].includes('fragment')).length + D.monthly.fragments;
+  const frags = rest.filter(x => x[3].includes('fragment')).length + (claimed ? 0 : D.monthly.fragments);
   const bar = `<p>${t('wings.progress', { a: fmt(Math.min(have, D.wings)), b: fmt(D.wings), p: pct })}</p><div class="bar2"><i style="width:${pct}%"></i></div>`;
   if (!R) { $('out').innerHTML = `${bar}<p class="total">${t('wings.done')}</p>`; return; }
 
@@ -28,7 +29,7 @@ function calc() {
   <div class="results"><article class="res"><h3>${t('wings.rest', { f })}</h3><ul>
     ${li('', t('wings.floors'), fmt(rest.length))}${li(img('gold'), t('wings.gold'), fmt(sum(0)))}${li(img('fame'), t('wings.fame'), fmt(sum(2)))}
     ${li(img('infinity-coin'), t('wings.c.floors'), fmt(cf))}${li(img('infinity-coin'), t('wings.c.roulette'), '~' + fmt(roul))}
-    ${li(img('infinity-coin'), t('wings.c.monthly'), fmt(mon))}
+    ${li(img('infinity-coin'), t(claimed ? 'wings.c.monthly.done' : 'wings.c.monthly'), fmt(mon))}
     ${li(img('celestial-spire-box'), t('wings.boxes'), fmt(boxes))}${li(img('corrupted'), t('wings.frag'), fmt(frags))}
   </ul><p class="gold-line">${t('wings.c.total')}: ${img('infinity-coin')}${fmt(T)}</p>
   <p class="meta">${after ? t('wings.after', { n: fmt(after) }) : t('wings.after0')}</p></article></div>
@@ -36,5 +37,6 @@ function calc() {
   <p class="note">${t('wings.towers', { n: Math.ceil(R / all), w: Math.ceil(R / (all + tower)) })}</p>`;
 }
 ['floor', 'coins'].forEach(id => $(id).addEventListener('input', calc));
+$('done').addEventListener('change', calc);
 document.addEventListener('langchange', calc);
 fetch(`${ROOT}data/celestial-spire.json?v=${V}`).then(r => r.json()).then(d => { D = d; calc(); });

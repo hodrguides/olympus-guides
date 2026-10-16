@@ -107,5 +107,7 @@
   "wings.s4": "+ Monthly achievement at floor 50",
   "wings.time": "{m} months ({d} days)",
   "wings.towers": "With full runs only: about {n} runs ({w} counting the roulette).",
-  "wings.notes": "Approximate calculation: a month is 30 days and one floor a day is assumed for the daily. It doesn't count the monthly ranking reward or repeating the spire several times in the same month."
+  "wings.notes": "Approximate calculation: a month is 30 days and one floor a day is assumed for the daily. It doesn't count the monthly ranking reward or repeating the spire several times in the same month.",
+  "wings.month": "Spire completed this month (monthly achievement already claimed)",
+  "wings.c.monthly.done": "Monthly achievement (already claimed this month)"
 }

@@ -107,5 +107,7 @@
   "wings.s4": "+ Logro mensual del piso 50",
   "wings.time": "{m} meses ({d} días)",
   "wings.towers": "Solo con torres completas: unas {n} torres ({w} si cuentas la ruleta).",
-  "wings.notes": "Cálculo aproximado: un mes son 30 días y se supone un piso al día para la diaria. No cuenta la recompensa mensual de la clasificación ni que repitas la torre varias veces en un mismo mes."
+  "wings.notes": "Cálculo aproximado: un mes son 30 días y se supone un piso al día para la diaria. No cuenta la recompensa mensual de la clasificación ni que repitas la torre varias veces en un mismo mes.",
+  "wings.month": "Torre completada este mes (ya cobré el logro mensual)",
+  "wings.c.monthly.done": "Logro mensual (ya cobrado este mes)"
 }
