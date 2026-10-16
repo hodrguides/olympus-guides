@@ -104,3 +104,30 @@ th{color:var(--muted);font-weight:700}
 .ico{width:26px;height:26px;flex:none;display:grid;place-items:center}
 .ico img{max-width:100%;max-height:100%;image-rendering:auto}
 .gico{width:18px;height:18px;vertical-align:-3px;margin-right:.3rem}
+
+/* Pet AFK Arena */
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin:1.2rem 0}
+button.btn{font:inherit;font-weight:700;color:var(--text);cursor:pointer}
+button.btn.gold{color:#241a02}
+.search{font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;width:100%;max-width:420px;margin-bottom:1rem}
+.petgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.5rem}
+.pet{display:flex;align-items:center;gap:.5rem;padding:.4rem .6rem;background:var(--panel);border:1px solid var(--line);border-radius:12px}
+.pet.on{border-color:var(--gold-2);background:#1d2145}
+.pet input[type=checkbox]{width:1.1rem;height:1.1rem;accent-color:var(--gold);flex:none}
+.pp{width:36px;height:36px;object-fit:contain;flex:none}
+.pn{flex:1;min-width:0;line-height:1.25}
+.pn small{display:block;color:var(--muted)}
+.pi{width:22px;height:22px;object-fit:contain;vertical-align:middle;flex:none}
+.pt{font-size:.75rem;color:var(--muted)}
+.cnt{width:3.6rem;font:inherit;color:var(--text);background:var(--night);border:1px solid var(--line);border-radius:8px;padding:.25rem .4rem}
+.cnt[hidden]{display:none}
+.petout{margin-bottom:1rem}
+.petout .results{margin:.5rem 0}
+.job h3{display:flex;justify-content:space-between;gap:.5rem}
+.job ul{margin:.5rem 0}
+.job li{gap:.4rem}
+.job li .pp{width:28px;height:28px}
+.job li small{margin-left:auto;color:var(--muted)}
+.job .meta{margin:.2rem 0;color:var(--muted)}
+.job .rw{margin:.5rem 0 0;font-weight:700;color:var(--gold)}
+.total{font:700 1.5rem var(--head);color:var(--gold)}
