@@ -131,3 +131,7 @@ button.btn.gold{color:#241a02}
 .job .meta{margin:.2rem 0;color:var(--muted)}
 .job .rw{margin:.5rem 0 0;font-weight:700;color:var(--gold)}
 .total{font:700 1.5rem var(--head);color:var(--gold)}
+
+.tip{margin:1rem 0;padding:.8rem 1rem;border-left:3px solid var(--gold);background:rgba(240,195,90,.07);border-radius:0 10px 10px 0}
+.chk{display:flex;align-items:center;gap:.5rem;cursor:pointer}
+.chk input{width:1.1rem;height:1.1rem;accent-color:var(--gold)}

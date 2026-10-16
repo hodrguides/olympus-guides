@@ -65,5 +65,8 @@
   "pet.unused": "Mascotas sin usar: {n}",
   "pet.calculating": "Calculando…",
   "pet.list": "Tus mascotas",
-  "pet.copies": "Copias"
+  "pet.copies": "Copias",
+  "pet.tip": "Consejo: no marques las mascotas que no quieras tener ocupadas. Las que estén en una expedición de AFK Arena no pueden acompañarte ni ser invocadas en la Torre Celestial.",
+  "pet.only24": "Hacer únicamente expediciones de 24 h",
+  "pet.tip2": "Mi recomendación personal: Aurus para farmear (da un buff del 10% y tankea), Lumi para TS y expediciones (las del modo de un jugador, que se juegan tú mismo; no tienen nada que ver con AFK Arena) y Sleepy Koala para raids. Si quieres conservarlos para esos usos, no los marques en la calculadora: una mascota en una expedición de AFK Arena no se puede usar en otros modos."
 }

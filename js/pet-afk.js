@@ -66,10 +66,10 @@ function feasible(jobs, U, maxNodes) {
 }
 
 // Mejor reparto. Valor de una tarea: 24 h = r24; 12 h = 2 × r12 (se reenvía en los dos turnos del día).
-function solve(U, limitMs = 8000) {
+function solve(U, limitMs = 8000, only24 = false) {
   approx = false;
   const jobs = [];
-  D.camps.forEach((c, ci) => [12, 24].forEach(d =>
+  D.camps.forEach((c, ci) => (only24 ? [24] : [12, 24]).forEach(d =>
     jobs.push({ ci, d, w: d === 12 ? 2 * c[5] : c[6], P: c[1], tk: c[2], tv: c[3], k: c[4] })));
   const t0 = Date.now(), late = () => Date.now() - t0 > limitMs;
   const chk = idx => feasible(idx.map(x => jobs[x]), U, 500000);
@@ -125,6 +125,11 @@ $('list').addEventListener('change', e => {
   save(); upSel();
 });
 $('q').addEventListener('input', renderList);
+try { $('only24').checked = localStorage.getItem('petafk24') === '1'; } catch (e) {}
+$('only24').addEventListener('change', () => {
+  try { localStorage.setItem('petafk24', $('only24').checked ? '1' : '0'); } catch (e) {}
+  if (last) $('calc').click(); // si ya había un resultado, se recalcula con la nueva opción
+});
 $('clear').addEventListener('click', () => { counts = {}; save(); renderList(); upSel(); last = null; $('out').innerHTML = ''; });
 
 function show() {
@@ -149,7 +154,7 @@ function show() {
 $('calc').addEventListener('click', () => {
   if (!total()) { $('out').innerHTML = `<p class="note">${t('pet.none')}</p>`; return; }
   $('out').innerHTML = `<p class="note">${t('pet.calculating')}</p>`;
-  setTimeout(() => { const U = buildUnits(); last = { res: solve(U), U }; show(); }, 30);
+  setTimeout(() => { const U = buildUnits(); last = { res: solve(U, 8000, $('only24').checked), U }; show(); }, 30);
 });
 
 function refresh() { $('q').placeholder = t('pet.search'); renderList(); upSel(); show(); }

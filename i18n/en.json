@@ -7,7 +7,7 @@
   "hero.by": "Website created by Hodr. If you have questions or want to suggest another tool, message me in game.",
   "tools.title": "Tools",
   "tools.soon": "More tools on the way.",
-  "tool.tower.name": "Celestial Tower: floor guide",
+  "tool.tower.name": "Celestial Spire: floor guide",
   "tool.tower.desc": "Enemy element and damage type, plus the rewards for every floor.",
   "tool.wings.name": "Paimon's Wings",
   "tool.wings.desc": "Work out how much you still need to get Paimon's Wings (2000 coins).",
@@ -65,5 +65,8 @@
   "pet.unused": "Unused pets: {n}",
   "pet.calculating": "Calculating…",
   "pet.list": "Your pets",
-  "pet.copies": "Copies"
+  "pet.copies": "Copies",
+  "pet.tip": "Tip: don't tick the pets you don't want to keep busy. Pets on an AFK Arena expedition can't accompany you or be summoned in the Celestial Spire.",
+  "pet.only24": "Only do 24 h expeditions",
+  "pet.tip2": "My personal recommendation: Aurus for farming (it gives a 10% buff and tanks), Lumi for TS and expeditions (the single-player mode that you play yourself; it has nothing to do with AFK Arena) and Sleepy Koala for raids. If you want to keep them for those uses, don't tick them in the calculator: a pet on an AFK Arena expedition can't be used in other modes."
 }

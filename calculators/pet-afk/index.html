@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/style.css?v=14">
+<link rel="stylesheet" href="../../css/style.css?v=17">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" data-i18n="menu.button">Herramientas</button>
     <div class="menu-panel" id="menuPanel" hidden>
       <p class="menu-title" data-i18n="menu.guides">Guías</p>
-      <a data-path="guides/celestial-tower/" data-i18n="tool.tower.name">Torre Celestial: guía por pisos</a>
+      <a data-path="guides/celestial-spire/" data-i18n="tool.tower.name">Torre Celestial: guía por pisos</a>
       <p class="menu-title" data-i18n="menu.calcs">Calculadoras</p>
       <a data-path="calculators/paimon-wings/" data-i18n="tool.wings.name">Alas de Paimon</a>
       <a data-path="calculators/pet-afk/" data-i18n="tool.pet.name">Pet AFK Arena</a>
@@ -43,9 +43,13 @@
   <p class="lead" data-i18n="pet.intro"></p>
   <p class="note" data-i18n="pet.rules"></p>
 
+  <p class="tip" data-i18n="pet.tip">Consejo: no marques las mascotas que no quieras tener ocupadas. Las que estén en una expedición de AFK Arena no pueden acompañarte ni ser invocadas en la Torre Celestial.</p>
+  <p class="tip" data-i18n="pet.tip2">Mi recomendación personal: Aurus para farmear (da un buff del 10% y tankea), Lumi para TS y expediciones (las del modo de un jugador, que se juegan tú mismo; no tienen nada que ver con AFK Arena) y Sleepy Koala para raids. Si quieres conservarlos para esos usos, no los marques en la calculadora: una mascota en una expedición de AFK Arena no se puede usar en otros modos.</p>
+
   <div class="bar">
     <button class="btn gold" id="calc" type="button" data-i18n="pet.calc">Calcular mejor reparto</button>
     <button class="btn" id="clear" type="button" data-i18n="pet.clear">Vaciar selección</button>
+    <label class="chk"><input type="checkbox" id="only24"><span data-i18n="pet.only24">Hacer únicamente expediciones de 24 h</span></label>
     <span id="sel" class="note"></span>
   </div>
   <div id="out" class="petout" aria-live="polite"></div>
@@ -59,7 +63,7 @@
   <p data-i18n="footer.disclaimer">Proyecto de fans, sin relación oficial con Olympus ni con los desarrolladores de NosTale. Todas las marcas pertenecen a sus propietarios.</p>
 </footer>
 
-<script src="../../js/main.js?v=14"></script>
-<script src="../../js/pet-afk.js?v=14"></script>
+<script src="../../js/main.js?v=17"></script>
+<script src="../../js/pet-afk.js?v=17"></script>
 </body>
 </html>
