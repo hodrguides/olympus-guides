@@ -1,5 +1,5 @@
 // Reutilizable en cualquier página: calcula la raíz del sitio a partir de la ruta de este script.
-const V = '25'; // sube este número en cada versión para forzar la recarga de cachés
+const V = '27'; // sube este número en cada versión para forzar la recarga de cachés
 const ROOT = new URL('../', document.currentScript.src).href;
 const LANGS = ['es', 'en'];
 const cache = {};
@@ -23,20 +23,32 @@ async function setLang(lang) {
   });
   document.querySelectorAll('.lang button').forEach(b =>
     b.classList.toggle('active', b.dataset.lang === lang));
-  try { localStorage.setItem('lang', lang); } catch (e) {}
   window.I18N = dict;
   document.dispatchEvent(new CustomEvent('langchange'));
 }
 
-// Enlaces relativos a la raíz (funcionan también en GitHub Pages de proyecto y en subcarpetas)
-document.querySelectorAll('[data-path]').forEach(a => a.href = ROOT + a.dataset.path);
+// El idioma elegido viaja en la dirección (?lang=en), sin guardar nada en el navegador.
+let chosen = new URLSearchParams(location.search).get('lang');
+if (!LANGS.includes(chosen)) chosen = null;
 
-// Idioma: elección guardada > idioma del navegador > español
-let saved = null;
-try { saved = localStorage.getItem('lang'); } catch (e) {}
-setLang(saved || (navigator.language || 'es').slice(0, 2));
-document.querySelectorAll('.lang button').forEach(b =>
-  b.addEventListener('click', () => setLang(b.dataset.lang)));
+// Enlaces relativos a la raíz (funcionan también en GitHub Pages de proyecto y en subcarpetas)
+function updateLinks() {
+  document.querySelectorAll('[data-path]').forEach(a => {
+    const [p, hash] = a.dataset.path.split('#');
+    a.href = ROOT + p + (chosen ? `?lang=${chosen}` : '') + (hash ? '#' + hash : '');
+  });
+}
+updateLinks();
+
+// Idioma: el de la dirección, si lo hay; si no, el del navegador; si no, español
+setLang(chosen || (navigator.language || 'es').slice(0, 2));
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
+  chosen = b.dataset.lang;
+  updateLinks();
+  const u = new URL(location.href); u.searchParams.set('lang', chosen);
+  history.replaceState(null, '', u);
+  setLang(chosen);
+}));
 
 // Menú desplegable
 const btn = document.getElementById('menuBtn');

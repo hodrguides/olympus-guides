@@ -8,8 +8,6 @@ const slug = s => s.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, 
 const ico = (dir, id, alt) => `<img class="pi" src="${ROOT}assets/${dir}/${id}.png" alt="${alt}" title="${alt}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'pt',textContent:this.alt}))">`;
 const pic = n => `<img class="pp" src="${ROOT}assets/pets/${slug(n)}.png" alt="" onerror="this.style.visibility='hidden'">`;
 const acorn = () => `<img class="gico" src="${ROOT}assets/materials/golden-acorn.png" alt="" onerror="this.remove()">`;
-try { counts = JSON.parse(localStorage.getItem('petafk') || '{}'); levels = JSON.parse(localStorage.getItem('petafk_lv') || '{}'); } catch (e) {}
-const save = () => { try { localStorage.setItem('petafk', JSON.stringify(counts)); localStorage.setItem('petafk_lv', JSON.stringify(levels)); } catch (e) {} };
 // Poder actual = poder máximo (nivel 99) / 99 × nivel, truncado a entero como en el juego
 const curPower = (max, lv) => Math.floor(max * lv / 99);
 const pwText = (max, lv) => lv < 99 ? `${fmt(curPower(max, lv))} <span class="mx">/ ${fmt(max)}</span>` : fmt(max);
@@ -127,7 +125,7 @@ $('list').addEventListener('change', e => {
     const v = e.target.value === '' ? 99 : Math.max(1, Math.min(99, Math.floor(+e.target.value) || 1));
     if (v === 99) delete levels[name]; else levels[name] = v;
     e.target.value = v; row.querySelector('.pw').innerHTML = pwText(pet[3], v);
-    save(); return;
+    return;
   }
   counts[name] = e.target.type === 'checkbox' ? (e.target.checked ? 1 : 0)
     : Math.max(0, Math.min(99, Math.floor(+e.target.value || 0)));
@@ -135,16 +133,14 @@ $('list').addEventListener('change', e => {
   const n = counts[name] || 0;
   row.classList.toggle('on', !!n); row.querySelector('input[type=checkbox]').checked = !!n;
   row.querySelector('.ctl').hidden = !n; row.querySelector('.cnt').value = n || 1;
-  save(); upSel();
+  upSel();
 });
 $('q').addEventListener('input', renderList);
 $('out').addEventListener('click', e => { const b = e.target.closest('.copybtn'); if (b) copyBtn(b, planText); });
-try { $('only24').checked = localStorage.getItem('petafk24') === '1'; } catch (e) {}
 $('only24').addEventListener('change', () => {
-  try { localStorage.setItem('petafk24', $('only24').checked ? '1' : '0'); } catch (e) {}
   if (last) $('calc').click(); // si ya había un resultado, se recalcula con la nueva opción
 });
-$('clear').addEventListener('click', () => { counts = {}; levels = {}; save(); renderList(); upSel(); last = null; $('out').innerHTML = ''; });
+$('clear').addEventListener('click', () => { counts = {}; levels = {}; renderList(); upSel(); last = null; $('out').innerHTML = ''; });
 
 function show() {
   if (!last) return;

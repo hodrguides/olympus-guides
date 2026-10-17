@@ -1,3 +1,10 @@
+/* Tipografías alojadas en esta web (sin pedirlas a Google). Archivos en assets/fonts/ */
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/cinzel-600.woff2') format('woff2'),url('../assets/fonts/cinzel-600.ttf') format('truetype')}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:700;font-display:swap;src:url('../assets/fonts/cinzel-700.woff2') format('woff2'),url('../assets/fonts/cinzel-700.ttf') format('truetype')}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:400;font-display:swap;src:url('../assets/fonts/nunito-400.woff2') format('woff2'),url('../assets/fonts/nunito-400.ttf') format('truetype')}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:600;font-display:swap;src:url('../assets/fonts/nunito-600.woff2') format('woff2'),url('../assets/fonts/nunito-600.ttf') format('truetype')}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:700;font-display:swap;src:url('../assets/fonts/nunito-700.woff2') format('woff2'),url('../assets/fonts/nunito-700.ttf') format('truetype')}
+
 :root{
   --night:#0d1022; --panel:#171b36; --line:#2a3059;
   --text:#e9ecff; --muted:#a3abd6; --gold:#f0c35a; --gold-2:#b98a22; --sky:#8fb8ff;
