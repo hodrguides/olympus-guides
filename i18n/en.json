@@ -116,5 +116,6 @@
   "wings.title": "Paimon's Wings",
   "pet.level": "Level",
   "pet.lv": "Lv.",
-  "pet.levelnote": "Each pet's power is calculated as max power ÷ 99 × level, without decimals (truncated, as in the game). If you own several copies of a pet, the same level is used for all of them."
+  "pet.levelnote": "Each pet's power is calculated as max power ÷ 99 × level, without decimals (truncated, as in the game). If you own several copies of a pet, the same level is used for all of them.",
+  "th.mats": "Materials"
 }

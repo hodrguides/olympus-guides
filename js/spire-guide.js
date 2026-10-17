@@ -1,6 +1,6 @@
 const $ = id => document.getElementById(id);
 let D = null;
-const fmt = n => n.toLocaleString(document.documentElement.lang || 'es');
+const fmt = fmtNum;
 const cap = s => s[0].toUpperCase() + s.slice(1);
 const ico = (dir, id, alt) => `<img class="pi" src="${ROOT}assets/${dir}/${id}.png" alt="${alt}" title="${alt}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'pt',textContent:this.alt}))">`;
 const goldIco = `<img class="gico" src="${ROOT}assets/materials/gold.png" alt="" onerror="this.remove()">`;

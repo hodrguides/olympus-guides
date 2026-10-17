@@ -1,5 +1,5 @@
 // Reutilizable en cualquier página: calcula la raíz del sitio a partir de la ruta de este script.
-const V = '27'; // sube este número en cada versión para forzar la recarga de cachés
+const V = '28'; // sube este número en cada versión para forzar la recarga de cachés
 const ROOT = new URL('../', document.currentScript.src).href;
 const LANGS = ['es', 'en'];
 const cache = {};
@@ -73,6 +73,14 @@ if (portraitBtn && lightbox) {
   });
   lightbox.addEventListener('click', () => lightbox.close()); // clic en cualquier sitio cierra
 }
+
+// Números con separador de miles siempre (1.500 en español, 1,500 en inglés), también los de 4 cifras
+window.fmtNum = n => {
+  const es = (document.documentElement.lang || 'es') === 'es';
+  const [i, d] = String(n).split('.');
+  const g = i.replace(/\B(?=(\d{3})+(?!\d))/g, es ? '.' : ',');
+  return d ? g + (es ? ',' : '.') + d : g;
+};
 
 // Copiar texto al portapapeles (con plan B para navegadores antiguos)
 window.copyText = async text => {

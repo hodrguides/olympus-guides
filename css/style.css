@@ -168,3 +168,9 @@ table.spire td:nth-child(2),table.spire td:nth-child(3),table.spire td:nth-child
 .fld{display:flex;align-items:center;gap:.4rem;color:var(--muted);font-size:.9rem}
 .lvl{width:3.6rem;font:inherit;color:var(--text);background:var(--night);border:1px solid var(--line);border-radius:8px;padding:.25rem .4rem}
 .pn .mx{color:var(--muted);opacity:.8}
+
+.bd{min-width:720px}
+.bd th:nth-child(4),.bd td:nth-child(4){text-align:left}
+.bd td{vertical-align:middle}
+.mi{display:inline-flex;align-items:center;gap:.25rem;margin:.15rem .8rem .15rem 0;white-space:nowrap}
+.mi .ico{width:22px;height:22px}

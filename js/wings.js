@@ -1,7 +1,7 @@
 const $ = id => document.getElementById(id);
 let D = null, lastText = '';
 const t = (k, v = {}) => Object.entries(v).reduce((s, [x, y]) => s.replace(`{${x}}`, y), (window.I18N || {})[k] || k);
-const fmt = n => n.toLocaleString(document.documentElement.lang || 'es');
+const fmt = fmtNum;
 const img = (id, cls = 'gico') => `<img class="${cls}" src="${ROOT}assets/materials/${id}.png" alt="" onerror="this.remove()">`;
 const num = (id, min, max) => Math.min(max, Math.max(min, Math.floor(+$(id).value) || min));
 

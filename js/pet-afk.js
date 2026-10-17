@@ -2,7 +2,7 @@ const $ = id => document.getElementById(id);
 let D = null, counts = {}, levels = {}, last = null, planText = '', approx = false, NOSYM = false;
 const t = (k, v = {}) => Object.entries(v).reduce((s, [x, y]) => s.replace(`{${x}}`, y), (window.I18N || {})[k] || k);
 const lang = () => document.documentElement.lang || 'es';
-const fmt = n => n.toLocaleString(lang());
+const fmt = fmtNum;
 const cap = s => s[0].toUpperCase() + s.slice(1);
 const slug = s => s.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const ico = (dir, id, alt) => `<img class="pi" src="${ROOT}assets/${dir}/${id}.png" alt="${alt}" title="${alt}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'pt',textContent:this.alt}))">`;

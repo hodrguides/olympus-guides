@@ -116,5 +116,6 @@
   "wings.title": "Alas de Paimon",
   "pet.level": "Nivel",
   "pet.lv": "Nv.",
-  "pet.levelnote": "El poder de cada mascota se calcula como poder máximo ÷ 99 × nivel, sin decimales (se trunca, como en el juego). Si tienes varias copias de una mascota, se usa el mismo nivel para todas."
+  "pet.levelnote": "El poder de cada mascota se calcula como poder máximo ÷ 99 × nivel, sin decimales (se trunca, como en el juego). Si tienes varias copias de una mascota, se usa el mismo nivel para todas.",
+  "th.mats": "Materiales"
 }
