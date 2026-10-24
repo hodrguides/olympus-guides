@@ -1,5 +1,5 @@
 // Reutilizable en cualquier página: calcula la raíz del sitio a partir de la ruta de este script.
-const V = '30'; // sube este número en cada versión para forzar la recarga de cachés
+const V = '33'; // sube este número en cada versión para forzar la recarga de cachés
 const ROOT = new URL('../', document.currentScript.src).href;
 const LANGS = ['es', 'en'];
 const cache = {};
