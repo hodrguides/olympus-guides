@@ -208,5 +208,16 @@
   "x.help.t2": "Don't change the order or the columns of the file: if you do, it won't be possible to add to it.",
   "x.help.t3": "You can use the same file for raids and rifts: both calculators write the same columns.",
   "x.help.t4": "On a phone you can only download the file, not add rows to an earlier one.",
-  "x.help.t5": "Nothing is sent or saved by the site: everything happens in your browser."
+  "x.help.t5": "Nothing is sent or saved by the site: everything happens in your browser.",
+  "tool.rguide.name": "Raid guides",
+  "tool.rguide.desc": "Step-by-step guides for each raid, with screenshots and the best action in each situation.",
+  "rgd.intro": "Pick a raid and follow the guide. When you need to decide what to do depending on the situation, click the option that applies to you.",
+  "rgd.raid": "Raid",
+  "rgd.choose": "Choose a raid",
+  "rgd.empty": "Choose a raid to see its guide.",
+  "rgd.soon": "coming soon",
+  "rgd.soonmsg": "This raid's guide is being prepared.",
+  "rgd.toc": "In this guide",
+  "rgd.pending": "Screenshot pending",
+  "rgd.err": "The guide could not be loaded."
 }

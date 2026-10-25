@@ -226,3 +226,32 @@ table.spire td:nth-child(2),table.spire td:nth-child(3),table.spire td:nth-child
 .xhelp h4{margin:1rem 0 .3rem;font-family:var(--head);color:var(--gold)}
 .xhelp ol,.xhelp ul{margin:.2rem 0 .4rem;padding-left:1.4rem;color:var(--muted)}
 .xhelp li{margin:.25rem 0}
+
+/* Guías de raids */
+.guide h2{font-size:1.9rem;margin:1rem 0 .4rem}
+.gsum{color:var(--muted);font-size:1.1rem;margin:0 0 1rem}
+.gtoc{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 1.5rem}
+.gtoc span{color:var(--muted);font-weight:700}
+.gtoc button{font:inherit;font-weight:700;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:.3rem .9rem;cursor:pointer}
+.gtoc button:hover{border-color:var(--gold-2)}
+.gsec{scroll-margin-top:4.5rem;padding:1.3rem 0;border-top:1px solid var(--line)}
+.gsec h3{font-size:1.4rem;color:var(--gold);margin-bottom:.8rem}
+.gsec p{margin:.5rem 0}
+.glist{margin:.5rem 0 1rem;padding-left:1.3rem}
+.glist li{margin:.4rem 0}
+.gm{margin:.8rem 0;max-width:760px}
+.gm img{display:block;max-width:100%;border:1px solid var(--line);border-radius:12px;cursor:zoom-in}
+.gm figcaption{color:var(--muted);font-size:.9rem;margin-top:.3rem}
+.mph{display:grid;place-items:center;min-height:120px;padding:1rem;border:2px dashed var(--line);border-radius:12px;color:var(--muted);text-align:center;font-size:.9rem}
+.gdec{margin:1rem 0;padding:1rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+.gq{font:700 1.1rem var(--head);color:var(--text);margin:0 0 .7rem!important}
+.gopts{display:flex;flex-wrap:wrap;gap:.6rem}
+.gopt{font:inherit;font-weight:700;color:var(--text);background:var(--night);border:1px solid var(--line);border-radius:12px;padding:.55rem 1rem;cursor:pointer;text-align:left;display:flex;flex-direction:column;line-height:1.25}
+.gopt small{font-weight:400;color:var(--muted)}
+.gopt:hover{border-color:var(--gold-2)}
+.gopt.on{background:var(--gold);border-color:var(--gold);color:#241a02}
+.gopt.on small{color:#4a3a10}
+.gpanel{margin-top:.9rem;padding-left:1rem;border-left:3px solid var(--gold-2)}
+.gcard,.gcall{margin:1rem 0;padding:.9rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.gcall{border-left:3px solid var(--gold)}
+.gcard h4,.gcall b{font-family:var(--head);color:var(--gold);font-size:1.1rem}

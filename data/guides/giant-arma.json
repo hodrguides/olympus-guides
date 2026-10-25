@@ -1,0 +1,446 @@
+{
+ "summary": {
+  "es": "Hay que activar las 3 palancas (LEVER) y matar a los 4 jefes (BOSS) antes de cruzar el BOSS PORTAL hacia el jefe final. Elige tu grupo y sigue los pasos.",
+  "en": "You must activate the 3 levers (LEVER) and kill the 4 bosses (BOSS) before crossing the BOSS PORTAL to the final boss. Pick your group and follow the steps."
+ },
+ "sections": [
+  {
+   "id": "map",
+   "title": {
+    "es": "El mapa",
+    "en": "The map"
+   },
+   "blocks": [
+    {
+     "type": "media",
+     "file": "map",
+     "kind": "img",
+     "caption": {
+      "es": "START HERE: punto de inicio · BOSS PORTAL: portal al jefe final · LEVER 1-3: palancas · BOSS 1-4: jefes",
+      "en": "START HERE: starting point · BOSS PORTAL: portal to the final boss · LEVER 1-3: levers · BOSS 1-4: bosses"
+     }
+    },
+    {
+     "type": "text",
+     "text": {
+      "es": "Para avanzar es necesario activar las 3 palancas (LEVER 1, 2 y 3) y matar a los 4 jefes (BOSS 1, 2, 3 y 4).",
+      "en": "To advance you need to activate the 3 levers (LEVER 1, 2 and 3) and kill the 4 bosses (BOSS 1, 2, 3 and 4)."
+     }
+    }
+   ]
+  },
+  {
+   "id": "start",
+   "title": {
+    "es": "Al empezar",
+    "en": "At the start"
+   },
+   "blocks": [
+    {
+     "type": "decision",
+     "question": {
+      "es": "¿A qué grupo perteneces?",
+      "en": "Which group are you in?"
+     },
+     "options": [
+      {
+       "label": {
+        "es": "Grupo 1",
+        "en": "Group 1"
+       },
+       "blocks": [
+        {
+         "type": "text",
+         "text": {
+          "es": "Sois los encargados de matar al Boss 1 y activar la LEVER 1. Vais caminando, hacéis vuestro trabajo y después os unís al resto del grupo (si es necesario).",
+          "en": "You are in charge of killing Boss 1 and activating LEVER 1. You walk, do your job and then join the rest of the group (if needed)."
+         }
+        }
+       ],
+       "hint": {
+        "es": "Van caminando",
+        "en": "Walk"
+       }
+      },
+      {
+       "label": {
+        "es": "Grupo 2",
+        "en": "Group 2"
+       },
+       "blocks": [
+        {
+         "type": "text",
+         "text": {
+          "es": "Usáis un vehículo de teletransporte aleatorio. Fíjate en qué zona caes:",
+          "en": "You use a random teleport vehicle. Check which zone you land in:"
+         }
+        },
+        {
+         "type": "media",
+         "file": "zones",
+         "kind": "img",
+         "caption": {
+          "es": "Zona 1, Zona 2, Zona 3 y Pasillo Minis",
+          "en": "Zone 1, Zone 2, Zone 3 and Minis Corridor"
+         }
+        },
+        {
+         "type": "decision",
+         "question": {
+          "es": "¿En qué zona has caído?",
+          "en": "Which zone did you land in?"
+         },
+         "options": [
+          {
+           "label": {
+            "es": "Zona 1",
+            "en": "Zone 1"
+           },
+           "blocks": [
+            {
+             "type": "text",
+             "text": {
+              "es": "Vuelve a hacer teletransporte, o ve caminando hacia la Zona 2 para juntarte con el grupo y golpear al lure de los 3 jefes de las zonas superiores (los llamamos «minis», de minibosses).",
+              "en": "Teleport again, or walk to Zone 2 to join the group and hit the lure of the 3 bosses of the upper zones (we call them “minis”, short for minibosses)."
+             }
+            }
+           ]
+          },
+          {
+           "label": {
+            "es": "Zona 2",
+            "en": "Zone 2"
+           },
+           "blocks": [
+            {
+             "type": "decision",
+             "question": {
+              "es": "¿Eres el primero en llegar?",
+              "en": "Are you the first to arrive?"
+             },
+             "options": [
+              {
+               "label": {
+                "es": "Sí, soy el primero",
+                "en": "Yes, I'm first"
+               },
+               "blocks": [
+                {
+                 "type": "text",
+                 "text": {
+                  "es": "Debes juntar a los Boss 2 y 3 en el Pasillo. Cruza el Pasillo obligando a los jefes a meterse en él: así aplicamos daño en área entre todos y los matamos a la vez.",
+                  "en": "You must gather Boss 2 and Boss 3 in the Corridor. Cross the Corridor, forcing the bosses to enter it: this way we deal area damage together and kill them at the same time."
+                 }
+                },
+                {
+                 "type": "media",
+                 "file": "zone2-first",
+                 "kind": "img",
+                 "caption": {
+                  "es": "Reunir a los Boss 2 y 3 en el Pasillo",
+                  "en": "Gathering Boss 2 and Boss 3 in the Corridor"
+                 }
+                }
+               ]
+              },
+              {
+               "label": {
+                "es": "No, ya hay gente",
+                "en": "No, others are already there"
+               },
+               "blocks": [
+                {
+                 "type": "text",
+                 "text": {
+                  "es": "Tu misión es correr a pulsar la LEVER 2. Si ya hay alguien pulsándola, ve hacia el Pasillo Minis a aplicar daño.",
+                  "en": "Your job is to run and activate LEVER 2. If someone is already activating it, head to the Minis Corridor to deal damage."
+                 }
+                },
+                {
+                 "type": "media",
+                 "file": "zone2-not-first",
+                 "kind": "anim",
+                 "caption": {
+                  "es": "Correr a la LEVER 2 o ir al Pasillo Minis",
+                  "en": "Run to LEVER 2 or go to the Minis Corridor"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "label": {
+            "es": "Zona 3",
+            "en": "Zone 3"
+           },
+           "blocks": [
+            {
+             "type": "decision",
+             "question": {
+              "es": "¿Eres el primero en llegar?",
+              "en": "Are you the first to arrive?"
+             },
+             "options": [
+              {
+               "label": {
+                "es": "Sí, soy el primero",
+                "en": "Yes, I'm first"
+               },
+               "blocks": [
+                {
+                 "type": "text",
+                 "text": {
+                  "es": "Debes juntar al Boss 4 en el Pasillo. Cruza el Pasillo obligando al jefe a meterse en él: así aplicamos daño en área entre todos y lo matamos a la vez.",
+                  "en": "You must gather Boss 4 in the Corridor. Cross the Corridor, forcing the boss to enter it: this way we deal area damage together and kill it at the same time."
+                 }
+                },
+                {
+                 "type": "media",
+                 "file": "zone3-first",
+                 "kind": "img",
+                 "caption": {
+                  "es": "Reunir al Boss 4 en el Pasillo",
+                  "en": "Gathering Boss 4 in the Corridor"
+                 }
+                }
+               ]
+              },
+              {
+               "label": {
+                "es": "No, ya hay gente",
+                "en": "No, others are already there"
+               },
+               "blocks": [
+                {
+                 "type": "text",
+                 "text": {
+                  "es": "Tu misión es correr a pulsar la LEVER 3. Si ya hay alguien pulsándola, ve hacia el Pasillo Minis a aplicar daño.",
+                  "en": "Your job is to run and activate LEVER 3. If someone is already activating it, head to the Minis Corridor to deal damage."
+                 }
+                },
+                {
+                 "type": "media",
+                 "file": "zone3-not-first",
+                 "kind": "anim",
+                 "caption": {
+                  "es": "Correr a la LEVER 3 o ir al Pasillo Minis",
+                  "en": "Run to LEVER 3 or go to the Minis Corridor"
+                 }
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ],
+       "hint": {
+        "es": "Teletransporte aleatorio",
+        "en": "Random teleport"
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "roles",
+   "title": {
+    "es": "Roles de debuff",
+    "en": "Debuff roles"
+   },
+   "blocks": [
+    {
+     "type": "decision",
+     "question": {
+      "es": "¿Tienes un rol de debuff asignado?",
+      "en": "Do you have a debuff role assigned?"
+     },
+     "options": [
+      {
+       "label": {
+        "es": "DEBUFF BOSS 1",
+        "en": "DEBUFF BOSS 1"
+       },
+       "blocks": [
+        {
+         "type": "text",
+         "text": {
+          "es": "Aplica el debuff que te hayan asignado en ese Boss 1.",
+          "en": "Apply the debuff you were assigned on Boss 1."
+         }
+        }
+       ]
+      },
+      {
+       "label": {
+        "es": "DEBUFF en Minis",
+        "en": "DEBUFF on Minis"
+       },
+       "blocks": [
+        {
+         "type": "text",
+         "text": {
+          "es": "Aplica el debuff que te hayan asignado cuando los Boss 2, 3 y 4 estén juntos, de forma que debuffamos a los 3 a la vez y los derrotamos rápidamente.",
+          "en": "Apply the debuff you were assigned when Boss 2, 3 and 4 are together, so we debuff all 3 at once and defeat them quickly."
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "details",
+   "title": {
+    "es": "Detalles a tener en cuenta en esta fase",
+    "en": "Things to keep in mind in this phase"
+   },
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "es": "Cuando el BOSS 1 baja del 50% de HP aparecen enemigos que entorpecen activar la LEVER 1. Se aconseja un miembro que tenga invisibilidad en su kit.",
+       "en": "When BOSS 1 drops below 50% HP, enemies appear that make it harder to activate LEVER 1. It's advisable to have a member with invisibility in their kit."
+      },
+      {
+       "es": "Cuando el BOSS 2 baja del 50% de HP aparecen enemigos cerca del Pasillo Minis; pueden suponer un problema para jugadores de menor nivel.",
+       "en": "When BOSS 2 drops below 50% HP, enemies appear near the Minis Corridor; they can be a problem for lower-level players."
+      },
+      {
+       "es": "Cuando el BOSS 3 baja del 50% de HP aparecen enemigos que entorpecen activar la LEVER 2. Sé rápido al accionarla, o usa invisibilidad si procede.",
+       "en": "When BOSS 3 drops below 50% HP, enemies appear that make it harder to activate LEVER 2. Be quick when activating it, or use invisibility if applicable."
+      },
+      {
+       "es": "Cuando el BOSS 4 baja del 50% de HP aparecen enemigos que taponan el BOSS PORTAL y entorpecen el paso, pero se puede cruzar igualmente si los objetivos están cumplidos.",
+       "en": "When BOSS 4 drops below 50% HP, enemies appear that block the BOSS PORTAL and hinder the way, but you can still cross if the objectives are done."
+      },
+      {
+       "es": "Si tu rol es cruzar el portal para que el equipo pase, puedes dejar de golpear al grupo de jefes y apartar a esos enemigos que entorpecen tu avance hacia el portal.",
+       "en": "If your role is to cross the portal so the team can pass, you can stop hitting the group of bosses and move away the enemies that hinder your way to the portal."
+      }
+     ]
+    },
+    {
+     "type": "callout",
+     "title": {
+      "es": "Truco: usa las pets de tanque",
+      "en": "Tip: use your pets as tanks"
+     },
+     "text": {
+      "es": "Si los enemigos entorpecen las palancas, usa las pets para tankear. F5 abre los controles de las pets, D hace que te sigan, F las mueve a un sitio y S las deja totalmente quietas. Juega con estos controles, no es difícil: así atraes a los enemigos hacia una esquina y accionas la palanca con tranquilidad.",
+      "en": "If enemies get in the way of the levers, use your pets to tank. F5 opens the pet controls, D makes them follow you, F moves them to a spot and S keeps them completely still. Play with these controls, it's not hard: this way you lure the enemies into a corner and activate the lever in peace."
+     },
+     "media": {
+      "file": "pet-controls",
+      "kind": "anim",
+      "caption": {
+       "es": "Controles de las pets",
+       "en": "Pet controls"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "boss",
+   "title": {
+    "es": "Sala del jefe final",
+    "en": "Final boss room"
+   },
+   "blocks": [
+    {
+     "type": "media",
+     "file": "final-room",
+     "kind": "img",
+     "caption": {
+      "es": "Sala del jefe final",
+      "en": "Final boss room"
+     }
+    },
+    {
+     "type": "text",
+     "text": {
+      "es": "Es una sala amplia. El jefe tiene 3 mecánicas que debes conocer:",
+      "en": "It's a large room. The boss has 3 mechanics you need to know:"
+     }
+    },
+    {
+     "type": "card",
+     "title": {
+      "es": "Rayo",
+      "en": "Beam"
+     },
+     "text": {
+      "es": "Dispara un rayo en una dirección (los 4 puntos cardinales) que golpea de forma letal. Hay que esquivarlo, y es fácil de esquivar.",
+      "en": "It fires a beam in one direction (the 4 cardinal points) that hits lethally. It must be dodged, and it's easy to dodge."
+     },
+     "media": {
+      "file": "boss-beam",
+      "kind": "anim",
+      "caption": {
+       "es": "Rayo del jefe",
+       "en": "Boss beam"
+      }
+     }
+    },
+    {
+     "type": "card",
+     "title": {
+      "es": "Motion Detection Bomb",
+      "en": "Motion Detection Bomb"
+     },
+     "text": {
+      "es": "Es un debuff. Sabrás que lo tienes cuando tu personaje abra un globo de diálogo diciendo que tiene la bomba: si te mueves durante un tiempo determinado, morirás ejecutado. Se evita el 100% de las veces usando el título AI Destroyer (se obtiene al completar 100 raids Ultimate Giant Arma).",
+      "en": "It's a debuff. You'll know you have it when your character opens a speech bubble saying it has the bomb: if you move within a set time, you'll be executed. It can be avoided 100% of the time by using the AI Destroyer title (obtained by completing 100 Ultimate Giant Arma raids)."
+     },
+     "media": {
+      "file": "boss-bomb",
+      "kind": "anim",
+      "caption": {
+       "es": "Motion Detection Bomb",
+       "en": "Motion Detection Bomb"
+      }
+     }
+    },
+    {
+     "type": "card",
+     "title": {
+      "es": "Campos de energía",
+      "en": "Energy fields"
+     },
+     "text": {
+      "es": "El jefe crea campos de energía que hay que esquivar. Se avisan con un círculo rojo en el terreno y, al cabo de unos segundos, aplican un gran daño, pero no ejecutan.",
+      "en": "The boss creates energy fields that must be dodged. They are announced by a red circle on the ground and, after a few seconds, deal heavy damage, but they don't execute."
+     },
+     "media": {
+      "file": "boss-fields",
+      "kind": "anim",
+      "caption": {
+       "es": "Campos de energía",
+       "en": "Energy fields"
+      }
+     }
+    },
+    {
+     "type": "callout",
+     "title": {
+      "es": "Otras mecánicas",
+      "en": "Other mechanics"
+     },
+     "text": {
+      "es": "El jefe cuenta con otras mecánicas que en un servidor como Olympus no tenemos en cuenta, porque superamos ampliamente en daño este raid y apenas tienen impacto. Si empezamos de nuevo en un hipotético servidor Odyssey, esta guía se actualizará.",
+      "en": "The boss has other mechanics that we don't take into account on a server like Olympus, because we far exceed this raid's damage requirements and they barely have an impact. If we start over on a hypothetical Odyssey server, this guide will be updated."
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -208,5 +208,16 @@
   "x.help.t2": "No cambies el orden ni las columnas del archivo: si lo haces, ya no se podrá añadir.",
   "x.help.t3": "Puedes usar el mismo archivo para raids y para rifts: las dos calculadoras escriben las mismas columnas.",
   "x.help.t4": "Desde el móvil solo se puede descargar el archivo, no añadir filas a uno anterior.",
-  "x.help.t5": "Nada se envía ni se guarda en la web: todo ocurre en tu navegador."
+  "x.help.t5": "Nada se envía ni se guarda en la web: todo ocurre en tu navegador.",
+  "tool.rguide.name": "Guías de raids",
+  "tool.rguide.desc": "Paso a paso de cada raid, con capturas y la mejor acción en cada situación.",
+  "rgd.intro": "Elige un raid y sigue la guía. Cuando haya que decidir qué hacer según la situación, pulsa la opción que te corresponda.",
+  "rgd.raid": "Raid",
+  "rgd.choose": "Elige un raid",
+  "rgd.empty": "Elige un raid para ver su guía.",
+  "rgd.soon": "próximamente",
+  "rgd.soonmsg": "La guía de este raid está en preparación.",
+  "rgd.toc": "En esta guía",
+  "rgd.pending": "Captura pendiente",
+  "rgd.err": "No se pudo cargar la guía."
 }
