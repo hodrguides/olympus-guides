@@ -1,6 +1,6 @@
 const $ = id => document.getElementById(id);
 let INDEX = null, cur = '', data = null, sel = {};
-const cache = {};
+const guideCache = {};
 const lang = () => document.documentElement.lang || 'es';
 const t = k => (window.I18N || {})[k] || k;
 const L = o => o == null ? '' : typeof o === 'string' ? o : (o[lang()] || o.es);
@@ -62,7 +62,7 @@ async function choose(id, push) {
   if (!raid) { $('msg').textContent = t('rgd.empty'); $('msg').hidden = false; return renderGuide(); }
   if (!raid.ready) { $('msg').textContent = t('rgd.soonmsg'); $('msg').hidden = false; return renderGuide(); }
   try {
-    data = cache[id] || (cache[id] = await (await fetch(`${ROOT}data/guides/${id}.json?v=${V}`)).json());
+    data = guideCache[id] || (guideCache[id] = await (await fetch(`${ROOT}data/guides/${id}.json?v=${V}`)).json());
     if (cur !== id) return;                            // el jugador cambió de raid mientras cargaba
     $('msg').hidden = true; renderGuide();
   } catch (e) { $('msg').textContent = t('rgd.err'); $('msg').hidden = false; renderGuide(); }
