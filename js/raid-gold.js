@@ -40,6 +40,7 @@ function renderTable() {
       <td class="sub">${goldIco}${fmt(subtotal(i, j))}</td></tr>`;
   }).join('');
   updateTotals();
+  $('xhint').textContent = t('rg.x.hint') + (FS ? '' : ' ' + t('rg.x.hint2'));
 }
 
 function updateTotals() {
@@ -76,6 +77,71 @@ $('rows').addEventListener('change', e => {
   tr.querySelector('.sub').innerHTML = goldIco + fmt(subtotal(i, j));
   updateTotals();
 });
+// ---- Exportar a CSV: todo ocurre en el navegador, no se envía ni se guarda nada ----
+const FS = 'showSaveFilePicker' in window && 'showOpenFilePicker' in window;   // Chrome/Edge de escritorio pueden editar el archivo
+const HEAD = ['rg.x.h.date', 'rg.x.h.raid', 'rg.x.h.item', 'rg.x.h.qty', 'rg.x.h.sold', 'rg.x.h.unit', 'rg.x.h.sub'];
+const TYPES = [{ description: 'CSV', accept: { 'text/csv': ['.csv'] } }];
+const say = msg => { $('xstatus').textContent = msg; };
+const defSep = () => (document.documentElement.lang || 'es') === 'es' ? ';' : ',';
+const cell = (v, sep) => { const s = String(v); return /["\r\n]/.test(s) || s.includes(sep) ? `"${s.replace(/"/g, '""')}"` : s; };
+const line = (a, sep) => a.map(v => cell(v, sep)).join(sep);
+
+// Una fila por objeto con cantidad > 0 de todos los raids calculados en esta visita
+function exportRows() {
+  const d = new Date(), date = [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-');
+  const rows = [];
+  D.raids.forEach((r, i) => r.items.forEach(([name, npc, , tr], j) => {
+    const s = state[i][j]; if (!s.q) return;
+    const mk = tr && s.sell === 'mk', unit = mk ? (s.mk || 0) : (npc || 0);
+    rows.push([date, r.name, name, s.q, mk ? 'Nosbazar' : 'NPC', unit, s.q * unit]);
+  }));
+  return rows;
+}
+// Añade las filas al contenido existente (o crea el archivo con su cabecera). null = no es un archivo de esta web.
+function csvFor(existing, rows) {
+  let text = (existing || '').replace(/^\uFEFF/, '');
+  const eol = text.includes('\r\n') ? '\r\n' : text.includes('\n') ? '\n' : '\r\n';
+  let sep = defSep();
+  if (text.trim() === '') text = line(HEAD.map(k => t(k)), sep) + eol;
+  else {
+    const first = text.split(/\r?\n/)[0];
+    sep = first.includes(';') ? ';' : ',';                      // se respeta el separador del archivo
+    if (first.split(sep).length !== HEAD.length) return null;   // columnas distintas: no se toca
+    if (!/\n$/.test(text)) text += eol;
+  }
+  return '\uFEFF' + text + rows.map(r => line(r, sep)).join(eol) + eol;
+}
+function download(name, text) {
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' })), download: name });
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+async function write(handle, text) { const w = await handle.createWritable(); await w.write(text); await w.close(); }
+
+$('xnew').addEventListener('click', async () => {
+  const rows = exportRows(); if (!rows.length) return say(t('rg.x.none'));
+  const text = csvFor('', rows);
+  try {
+    if (FS) { await write(await showSaveFilePicker({ suggestedName: 'mis-raids.csv', types: TYPES }), text); say(t('rg.x.saved', { n: rows.length })); }
+    else { download('mis-raids.csv', text); say(t('rg.x.down', { n: rows.length })); }
+  } catch (e) { if (e.name !== 'AbortError') say(t('rg.x.err')); }
+});
+$('xadd').addEventListener('click', async () => {
+  const rows = exportRows(); if (!rows.length) return say(t('rg.x.none'));
+  if (!FS) return $('xfile').click();                           // Firefox/Safari: sigue en el evento 'change' del selector
+  try {
+    const [h] = await showOpenFilePicker({ types: TYPES, multiple: false });
+    const text = csvFor(await (await h.getFile()).text(), rows);
+    if (!text) return say(t('rg.x.bad'));
+    await write(h, text); say(t('rg.x.added', { n: rows.length }));
+  } catch (e) { if (e.name !== 'AbortError') say(t('rg.x.err')); }
+});
+$('xfile').addEventListener('change', async () => {
+  const f = $('xfile').files[0]; $('xfile').value = ''; if (!f) return;
+  const rows = exportRows(), text = csvFor(await f.text(), rows);
+  if (!text) return say(t('rg.x.bad'));
+  download(f.name, text); say(t('rg.x.down', { n: rows.length }));
+});
+
 $('raid').addEventListener('change', () => { cur = $('raid').value; renderTable(); });
 document.addEventListener('langchange', () => { if (D) { buildSelect(); renderTable(); } });
 fetch(`${ROOT}data/raids.json?v=${V}`).then(r => r.json()).then(d => { D = d; init(); buildSelect(); renderTable(); });

@@ -207,3 +207,22 @@ table.spire td:nth-child(2),table.spire td:nth-child(3),table.spire td:nth-child
 .seg label:has(input:disabled:not(:checked)) span{opacity:.35}
 .rgtotal{font:700 1.8rem var(--head);color:var(--gold);margin:1.2rem 0 .3rem}
 .ii{width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:.6rem}
+.export{display:flex;flex-wrap:wrap;gap:.8rem;margin:1rem 0 .4rem}
+
+/* Rifts */
+.rf{min-width:960px}
+.rf td{vertical-align:middle;text-align:right}
+.rf th:first-child,.rf td:first-child{text-align:left}
+.rf th:nth-child(6),.rf td:nth-child(6){text-align:center}
+.rf td:nth-child(2){color:var(--muted);white-space:nowrap}
+.rf input[type=number],.rf input.mk{font:inherit;color:var(--text);background:var(--night);border:1px solid var(--line);border-radius:8px;padding:.35rem .5rem;text-align:right}
+.rf input[type=number]{width:6rem}
+.rf input.mk{width:11.5rem}
+.rf input:disabled{opacity:.45}
+.mvq{margin:0 0 .3rem;font-weight:700;font-size:1.1rem}
+
+.xhelp{margin:1rem 0;padding:.8rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.xhelp summary{margin:0}
+.xhelp h4{margin:1rem 0 .3rem;font-family:var(--head);color:var(--gold)}
+.xhelp ol,.xhelp ul{margin:.2rem 0 .4rem;padding-left:1.4rem;color:var(--muted)}
+.xhelp li{margin:.25rem 0}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de farmeo en rifts · Olympus Guides</title>
+<!-- Vista previa al compartir (Discord, WhatsApp, redes). Si cambias de dirección, actualiza BASE en estas URLs. -->
+<meta name="description" content="Calcula cuánto oro ganas farmeando mapas individuales (rifts) de Olympus, vendiendo en NPC o en Nosbazar.">
+<link rel="canonical" href="https://hodrguides.github.io/olympus-guides/calculators/rift-farm/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Olympus Guides">
+<meta property="og:title" content="Calculadora de farmeo en rifts · Olympus Guides">
+<meta property="og:description" content="Calcula cuánto oro ganas farmeando mapas individuales (rifts) de Olympus, vendiendo en NPC o en Nosbazar.">
+<meta property="og:url" content="https://hodrguides.github.io/olympus-guides/calculators/rift-farm/">
+<meta property="og:image" content="https://hodrguides.github.io/olympus-guides/assets/hodr.png">
+<meta property="og:image:alt" content="Hodr, creador de Olympus Guides">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calculadora de farmeo en rifts · Olympus Guides">
+<meta name="twitter:description" content="Calcula cuánto oro ganas farmeando mapas individuales (rifts) de Olympus, vendiendo en NPC o en Nosbazar.">
+<meta name="twitter:image" content="https://hodrguides.github.io/olympus-guides/assets/hodr.png">
+<!-- /Vista previa -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪽</text></svg>">
+<link rel="stylesheet" href="../../css/style.css?v=38">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" data-path="">Olympus Guides</a>
+  <a class="support-link" data-path="#apoya" data-i18n="support.title">Apoya la web</a>
+
+  <div class="menu">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" data-i18n="menu.button">Herramientas</button>
+    <div class="menu-panel" id="menuPanel" hidden>
+      <p class="menu-title" data-i18n="menu.guides">Guías</p>
+      <a data-path="guides/celestial-spire/" data-i18n="tool.tower.name">Torre Celestial: guía por pisos</a>
+      <a data-path="guides/raid-checklist/" data-i18n="tool.raid.name">Checklist de raid</a>
+      <p class="menu-title" data-i18n="menu.calcs">Calculadoras</p>
+      <a data-path="calculators/paimon-wings/" data-i18n="tool.wings.name">Alas de Paimon</a>
+      <a data-path="calculators/pet-afk/" data-i18n="tool.pet.name">Pet AFK Arena</a>
+      <a data-path="calculators/pity/" data-i18n="tool.pity.name">Calculadora de pity</a>
+      <a data-path="calculators/raid-gold/" data-i18n="tool.raidgold.name">Calculadora de oro de raids</a>
+      <a data-path="calculators/rift-farm/" data-i18n="tool.rift.name">Calculadora de farmeo en rifts</a>
+    </div>
+  </div>
+
+  <div class="lang" role="group" aria-label="Idioma / Language">
+    <button data-lang="es" aria-label="Español" title="Español">
+      <svg viewBox="0 0 3 2" aria-hidden="true"><rect width="3" height="2" fill="#AA151B"/><rect y=".5" width="3" height="1" fill="#F1BF00"/></svg><span>ES</span>
+    </button>
+    <button data-lang="en" aria-label="English" title="English">
+      <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M30,15h30v15zv15h-30zh-30v-15zv-15h30z"/></clipPath><path d="M0,0v30h60v-30z" fill="#012169"/><path d="M0,0L60,30M60,0L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0L60,30M60,0L0,30" clip-path="url(#uk)" stroke="#C8102E" stroke-width="4"/><path d="M30,0v30M0,15h60" stroke="#fff" stroke-width="10"/><path d="M30,0v30M0,15h60" stroke="#C8102E" stroke-width="6"/></svg><span>EN</span>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+  <h1 data-i18n="tool.rift.name">Calculadora de farmeo en rifts</h1>
+  <p class="lead" data-i18n="rf.intro"></p>
+  <p class="tip" data-i18n="rg.note"></p>
+
+  <div class="form">
+    <label><span data-i18n="rf.map">Mapa</span><select id="map"></select></label>
+  </div>
+
+  <p id="empty" class="note" data-i18n="rf.empty"></p>
+  <div id="box" hidden>
+    <label class="chk mvq"><input type="checkbox" id="mv"><span data-i18n="rf.mv">¿Es una rift multiverso?</span></label>
+    <p class="note" data-i18n="rf.mv.hint"></p>
+    <div class="tablewrap"><table class="rf">
+      <thead><tr><th data-i18n="rg.th.item">Objeto</th><th data-i18n="rf.th.drop">% drop</th><th data-i18n="rg.th.qty">Cantidad</th><th data-i18n="rg.th.npc">Precio NPC</th><th data-i18n="rg.th.mk">Precio Nosbazar</th><th data-i18n="rg.th.sell">Vender en</th><th data-i18n="rg.th.sub">Subtotal</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <p class="rgtotal"><span data-i18n="rg.total">TOTAL</span> = <span id="total"></span></p>
+    <p class="note" id="all" hidden></p>
+    <div class="export">
+      <button class="btn gold" id="xnew" type="button" data-i18n="rg.x.new">Exportar (archivo nuevo)</button>
+      <button class="btn" id="xadd" type="button" data-i18n="rg.x.add">Añadir a mi archivo</button>
+      <input id="xfile" type="file" accept=".csv,text/csv" hidden>
+    </div>
+    <p class="note" id="xhint"></p>
+    <p class="note" id="xstatus" aria-live="polite"></p>
+    <details class="xhelp">
+      <summary data-i18n="x.help.title">¿Cómo exportar a una hoja de cálculo?</summary>
+      <h4 data-i18n="x.help.first">La primera vez</h4>
+      <ol>
+        <li data-i18n="x.help.f1"></li><li data-i18n="x.help.f2"></li><li data-i18n="x.help.f3"></li>
+      </ol>
+      <h4 data-i18n="x.help.next">Los días siguientes</h4>
+      <ol>
+        <li data-i18n="x.help.n1"></li><li data-i18n="x.help.n2"></li><li data-i18n="x.help.n3"></li><li data-i18n="x.help.n4"></li>
+      </ol>
+      <h4 data-i18n="x.help.tips">Consejos</h4>
+      <ul>
+        <li data-i18n="x.help.t1"></li><li data-i18n="x.help.t2"></li><li data-i18n="x.help.t3"></li><li data-i18n="x.help.t4"></li><li data-i18n="x.help.t5"></li>
+      </ul>
+    </details>
+  </div>
+</main>
+
+<footer>
+  <p data-i18n="footer.disclaimer">Proyecto de fans, sin relación oficial con Olympus ni con los desarrolladores de NosTale. Todas las marcas pertenecen a sus propietarios.</p>
+</footer>
+
+<script src="../../js/main.js?v=38"></script>
+<script src="../../js/rift-farm.js?v=38"></script>
+</body>
+</html>
