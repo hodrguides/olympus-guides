@@ -219,5 +219,8 @@
   "rgd.soonmsg": "This raid's guide is being prepared.",
   "rgd.toc": "In this guide",
   "rgd.pending": "Screenshot pending",
-  "rgd.err": "The guide could not be loaded."
+  "rgd.err": "The guide could not be loaded.",
+  "rf.gold": "Dropped gold",
+  "rf.gold.hint": "The gold the map drops, apart from the items. It is added to the total.",
+  "rf.gold.item": "Dropped gold"
 }

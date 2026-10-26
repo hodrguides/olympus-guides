@@ -255,3 +255,8 @@ table.spire td:nth-child(2),table.spire td:nth-child(3),table.spire td:nth-child
 .gcard,.gcall{margin:1rem 0;padding:.9rem 1.1rem;background:var(--panel);border:1px solid var(--line);border-radius:14px}
 .gcall{border-left:3px solid var(--gold)}
 .gcard h4,.gcall b{font-family:var(--head);color:var(--gold);font-size:1.1rem}
+
+.goldrow{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin:1rem 0 .2rem;padding:.8rem 1rem;background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.goldrow label{display:flex;align-items:center;gap:.4rem;font-weight:700}
+.goldrow input{font:inherit;color:var(--text);background:var(--night);border:1px solid var(--line);border-radius:8px;padding:.4rem .6rem;width:13rem;text-align:right}
+.goldrow .note{margin:0}

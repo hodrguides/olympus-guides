@@ -1,5 +1,5 @@
 const $ = id => document.getElementById(id);
-let D = null, state = {}, mv = {}, cur = '', list = [];
+let D = null, state = {}, mv = {}, gold = {}, cur = '', list = [];
 const t = (k, v = {}) => Object.entries(v).reduce((s, [x, y]) => s.replace(`{${x}}`, y), (window.I18N || {})[k] || k);
 const fmt = fmtNum;
 const goldIco = `<img class="gico" src="${ROOT}assets/materials/gold.png" alt="" onerror="this.remove()">`;
@@ -22,7 +22,8 @@ function subtotal(i, it) {
   const s = st(i, it), price = (!it[4] || s.sell === 'npc') ? (it[2] || 0) : (s.mk || 0);
   return s.q * price;
 }
-const mapTotal = i => itemsOf(i).reduce((sum, it) => sum + subtotal(i, it), 0);
+// Total del mapa = oro de los objetos vendidos + el oro que suelta el propio mapa (drop de oro)
+const mapTotal = i => itemsOf(i).reduce((sum, it) => sum + subtotal(i, it), 0) + (gold[i] || 0);
 const dropText = d => d == null ? '—' : (typeof d === 'string' ? d : fmt(d)) + '%';
 
 function buildSelect() {
@@ -38,6 +39,7 @@ function renderTable() {
   if (cur === '') return;
   const i = +cur; list = itemsOf(i);
   $('mv').checked = !!mv[i];
+  $('gold').value = gold[i] ? fmt(gold[i]) : '';
   $('rows').innerHTML = list.map((it, j) => {
     const [name, drop, npc, , tr, ic] = it, s = st(i, it), off = tr ? '' : ' disabled';
     return `<tr data-j="${j}"><td><img class="ii" src="${ROOT}assets/${ic}.png" alt="" onerror="this.style.visibility='hidden'">${name}${tr ? '' : ` <span class="nt" title="${t('rg.nt')}">🔒</span>`}</td>
@@ -101,13 +103,14 @@ function exportRows() {
   const d = new Date(), date = [d.getFullYear(), String(d.getMonth() + 1).padStart(2, '0'), String(d.getDate()).padStart(2, '0')].join('-');
   const rows = [];
   D.maps.forEach((m, i) => {
-    if (!state[i]) return;
+    if (!state[i] && !gold[i]) return;
     const label = m.name + (mv[i] ? ` (${t('rf.mvtag')})` : '');
     itemsOf(i).forEach(it => {
       const s = st(i, it); if (!s.q) return;
       const mkt = it[4] && s.sell === 'mk', unit = mkt ? (s.mk || 0) : (it[2] || 0);
       rows.push([date, label, it[0], s.q, mkt ? 'Nosbazar' : 'NPC', unit, s.q * unit]);
     });
+    if (gold[i]) rows.push([date, label, t('rf.gold.item'), gold[i], '-', 1, gold[i]]);   // oro dropeado
   });
   return rows;
 }
@@ -156,6 +159,7 @@ $('xfile').addEventListener('change', async () => {
   download(f.name, text); say(t('rg.x.down', { n: rows.length }));
 });
 
+$('gold').addEventListener('input', () => { gold[+cur] = formatInput($('gold')); updateTotals(); });
 $('mv').addEventListener('change', () => { mv[+cur] = $('mv').checked; renderTable(); });
 $('map').addEventListener('change', () => { cur = $('map').value; renderTable(); });
 document.addEventListener('langchange', () => { if (D) { buildSelect(); renderTable(); } });

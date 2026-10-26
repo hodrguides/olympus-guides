@@ -219,5 +219,8 @@
   "rgd.soonmsg": "La guía de este raid está en preparación.",
   "rgd.toc": "En esta guía",
   "rgd.pending": "Captura pendiente",
-  "rgd.err": "No se pudo cargar la guía."
+  "rgd.err": "No se pudo cargar la guía.",
+  "rf.gold": "Oro dropeado",
+  "rf.gold.hint": "El oro que suelta el mapa, aparte de los objetos. Se suma al total.",
+  "rf.gold.item": "Oro dropeado"
 }
