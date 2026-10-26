@@ -291,6 +291,21 @@
          }
         }
        ]
+      },
+      {
+       "label": {
+        "es": "DEBUFF FINAL BOSS",
+        "en": "DEBUFF FINAL BOSS"
+       },
+       "blocks": [
+        {
+         "type": "text",
+         "text": {
+          "es": "Tu cometido es aplicar tu debuff al jefe final, Giant Arma. No lo utilices en los minis: guárdalo para tenerlo disponible en el FINAL BOSS.",
+          "en": "Your job is to apply your debuff to the final boss, Giant Arma. Don't use it on the minis: save it so it's available for the FINAL BOSS."
+         }
+        }
+       ]
       }
      ]
     }
